@@ -29,21 +29,6 @@
         <p class="text-center text-xl text-gray-600 mb-8">
             Welcome to the Authenticated Machine. You are authorized!
         </p>
-
-        <!-- Main Content Area (A simple "dashboard" placeholder) -->
-        <div class="bg-indigo-50 p-6 rounded-lg border border-indigo-200 space-y-4">
-            <h2 class="text-2xl font-semibold text-indigo-700">Dashboard Status</h2>
-            <p class="text-gray-700">
-                This area shows content only authenticated users should see.
-                <br>Your temporary user session ID is: <span class="font-mono bg-indigo-200 text-indigo-800 p-1 rounded text-sm">guest_session_921</span>
-            </p>
-            
-            <ul class="list-disc list-inside text-gray-600 pl-4">
-                <li>Secret Feature 1: Running</li>
-                <li>Secret Feature 2: Running</li>
-                <li>System Time: <span id="currentTime" class="font-medium text-indigo-600">Loading...</span></li>
-            </ul>
-        </div>
         
         <!-- Logout Button -->
         <div class="mt-8 text-center">
@@ -59,26 +44,43 @@
 
     <!-- JavaScript Logic -->
     <script>
-        // Simple function to update the time placeholder (adds a bit of basic interactivity)
-        function updateTime() {
-            const timeElement = document.getElementById('currentTime');
-            if (timeElement) {
-                timeElement.textContent = new Date().toLocaleTimeString();
+        // --- Session Storage Logic (Internal) ---
+        function checkAuthStatus() {
+            // Check if an existing ID is available or set a new one.
+            let sessionId = sessionStorage.getItem('userSessionId');
+
+            if (!sessionId) {
+                // If no ID exists, simulate a fresh login and set a new, random ID.
+                sessionId = 'user_' + Math.random().toString(16).slice(2);
+                sessionStorage.setItem('userSessionId', sessionId);
+                console.log("New session started and stored in SessionStorage.");
+            } else {
+                // If ID exists, the user is authorized.
+                console.log("Authenticated session retrieved from storage.");
             }
+
+            // The ID is still tracked internally for the session, but not displayed.
+            console.log("Current Session ID:", sessionStorage.getItem('userSessionId'));
         }
-        setInterval(updateTime, 1000);
-        updateTime(); // Initial call
 
         // --- Logout Logic ---
         function logout() {
-            // For a student project, simply redirecting is fine.
             document.getElementById('logoutButton').innerHTML = 'Logging out...';
+            
+            // Clear the session ID from session storage
+            sessionStorage.removeItem('userSessionId');
+            console.log("Session ID cleared from SessionStorage.");
+
             // Use a short delay to simulate the action before redirecting
             setTimeout(() => {
                 // Redirect back to the login page (index.html)
                 window.location.href = "index.html";
             }, 500); 
         }
+
+        // Run the authentication check when the page loads
+        checkAuthStatus();
     </script>
+
 </body>
 </html>
