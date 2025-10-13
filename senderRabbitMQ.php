@@ -11,13 +11,21 @@ if (isset($argv[1]))
 }
 else
 {
-  $msg = "test message";
+  $msg = "login request";
 }
 
 $request = array();
+
+/* Used for testing
 $request['type'] = "Login";
 $request['username'] = "steve";
-$request['password'] = "password";
+$request['password'] = "password"; */
+
+// Login 
+$request['type'] = "Login";
+$request['username'] = $_POST['username'];
+$request['password'] = $_POST['password'];
+
 $request['message'] = $msg;
 $response = $client->send_request($request);
 //$response = $client->publish($request);
