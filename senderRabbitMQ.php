@@ -30,6 +30,15 @@ $request['message'] = $msg;
 $response = $client->send_request($request);
 //$response = $client->publish($request);
 
+// test if login is successful
+// TODO add code here 
+/* return code from recieverRabbitMQ.php
+  if return code = 1, login successful
+    change page to home
+  if return code = 0, login failed
+    return to login page
+*/
+
 echo "client received response: ".PHP_EOL;
 print_r($response);
 echo "\n\n";
