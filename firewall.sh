@@ -33,7 +33,6 @@ case "$ROLE" in
         ;;
     db)
         echo "Applying Database firewall rules..."
-        sudo ufw allow from $WEB_IP to any port 3306 proto tcp
         sudo ufw allow from $RMQ_IP to any port 3306 proto tcp
         sudo ufw deny from any
         ;;
