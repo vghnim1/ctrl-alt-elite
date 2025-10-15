@@ -31,13 +31,11 @@ $response = $client->send_request($request);
 //$response = $client->publish($request);
 
 // test if login is successful
-// TODO add code here 
-/* return code from recieverRabbitMQ.php
-  if return code = 1, login successful
-    change page to home
-  if return code = 0, login failed
-    return to login page
-*/
+if ($response['returnCode'] == '1'){ // returnCode 1 means login successful
+  header("Location:"); // TODO add location of home page
+} else if ($response['returnCode'] == '0'){ // returnCode 0 means login failed
+  header("Location:"); // TODO add location of login page
+}
 
 echo "client received response: ".PHP_EOL;
 print_r($response);
