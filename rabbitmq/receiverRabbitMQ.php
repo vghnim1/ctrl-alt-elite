@@ -6,10 +6,29 @@ require_once('rabbitMQLib.inc');
 
 function doLogin($username,$password)
 {
-    // lookup username in databas
-    // check password
-    return true;
-    //return false if not valid
+    // use to require database established
+    // $mysqli = require __DIR__ . "table name"; TODO create database table
+
+    // sanitize login
+    $uname = mysqli -> real_escape_string($username);
+    $pass = mysqli -> real_escape_string($password);
+
+    // create sql select statement
+    $sql = sprintf('SELECT /*password*/ from /*login table*/ where email = "%s"',
+      $uname);
+
+    // query database
+    $result = $mysqli -> query($sql);
+
+    if ($result && $user = $result -> fetch_assoc()) {
+      // check password
+      if ($pass == $user['password']){
+        return array ("returnCode" => '1', 'message'=>"Login successful"); 
+      } else {
+        return array ("returnCode" => '0', 'message'=>"Wrong password");
+      } } else {
+        return array ("returnCode" => '0', 'message'=>"User not found");
+    }
 }
 
 function requestProcessor($request)
