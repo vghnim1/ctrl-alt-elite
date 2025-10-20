@@ -7,7 +7,7 @@ require_once('rabbitMQLib.inc');
 function doLogin($username,$password)
 {
     // use to require database established
-    // $mysqli = require __DIR__ . "table name"; TODO create database table
+    // $mysqli = require __DIR__ . "users"; TODO create database table
 
     // sanitize login
     $uname = mysqli -> real_escape_string($username);
@@ -29,7 +29,7 @@ function doLogin($username,$password)
       } } else {
         return array ("returnCode" => '0', 'message'=>"User not found");
     }
-}
+} 
 
 function requestProcessor($request)
 {
