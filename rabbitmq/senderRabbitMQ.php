@@ -32,9 +32,9 @@ $response = $client->send_request($request);
 
 // test if login is successful
 if ($response['returnCode'] == '1'){ // returnCode 1 means login successful
-  header("Location:"); // TODO add location of home page
+  header("Location: authentication.html"); 
 } else if ($response['returnCode'] == '0'){ // returnCode 0 means login failed
-  header("Location:"); // TODO add location of login page
+  header("Location: index.html");
 }
 
 echo "client received response: ".PHP_EOL;
