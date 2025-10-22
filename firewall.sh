@@ -33,6 +33,10 @@ case "$ROLE" in
         ;;
     db)
         echo "Applying Database firewall rules..."
+<<<<<<< HEAD
+=======
+        sudo ufw allow from $WEB_IP to any port 3306 proto tcp
+>>>>>>> cea238b968ed477c7c7ddbed2f2322f34ae0815c
         sudo ufw allow from $RMQ_IP to any port 3306 proto tcp
         sudo ufw deny from any
         ;;
@@ -41,6 +45,14 @@ case "$ROLE" in
         ;;
 esac
 
+<<<<<<< HEAD
 echo "Enabling firewall.."
 sudo ufw enable
 sudo ufw status verbose
+=======
+
+
+echo "Enabling firewall.."
+sudo ufw enable
+sudo ufw status verbose
+>>>>>>> cea238b968ed477c7c7ddbed2f2322f34ae0815c
