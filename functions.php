@@ -2,10 +2,17 @@
     
     // start a session for a user
     function startSession($userId=null){
-        // TODO generate a session id
-        // TODO expires after 1 hour
-        // TODO secure cookie
-        // TODO return session id
+        // generate a session id
+        $sessionId = bin2hex(random_bytes(32));
+
+        // expires after 1 hour
+        $expiresAt = date('Y-m-d H:i:s', time() + 3600);
+
+        // secure cookie
+        setcookie('session_id', $sessionId, $expiresAt, "/", "", false, true);
+        
+        // return session id
+        return $sessionId;
     }
 
     // validate session
