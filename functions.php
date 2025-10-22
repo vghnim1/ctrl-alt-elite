@@ -18,6 +18,11 @@
         // TODO check if session id is valid
     }
 
+    // destroy session
+    function destroySession(){
+        // TODO remove session from storage
 
+        // TODO remove cookie
+    }
     
 ?>
