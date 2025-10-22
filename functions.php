@@ -41,9 +41,15 @@
 
     // destroy session
     function destroySession(){
-        // TODO remove session from storage
+        // remove session from storage
+        if (isset($_COOKIE['session_id'])) {
+            $pdo = new PDO('mysql:host=localhost;dbname=mydatabase', 'username', 'password');
+            $stmt = $pdo->prepare("DELETE FROM sessions WHERE session_id = ?");
+            $stmt->execute([$_COOKIE['session_id']]);
+        }
 
-        // TODO remove cookie
+        // force expire cookie
+        setcookie('session_id', '', time() - 3600, "/");
     }
     
 ?>
