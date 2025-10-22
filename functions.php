@@ -17,12 +17,26 @@
 
     // validate session
     function validateSession(){
-        // TODO if no cookie, no session, return false 
+        // if no cookie, no session, return false 
+        if (!isset($_COOKIE['session_id'])) {
+            return false;
+        }
 
         // get session id from cookie
         $sessionId = $_COOKIE['session_id'];
 
-        // TODO check if session id is valid
+        // check if session id is valid
+        $pdo = new PDO('mysql:host=localhost;dbname=mydatabase', 'username', 'password');
+        $stmt = $pdo->prepare("SELECT * FROM sessions WHERE session_id = ? AND expires_at >NOW()");
+        $stmt->execute([$sessionId]);
+        $session = $stmt->fetch();
+
+        if ($session) {
+            return true;
+        } else {
+            return false;
+            // session expired or invalid
+        }
     }
 
     // destroy session
