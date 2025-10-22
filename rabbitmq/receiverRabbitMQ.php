@@ -7,14 +7,14 @@ require_once('rabbitMQLib.inc');
 function doLogin($username,$password)
 {
     // use to require database established
-    // $mysqli = require __DIR__ . "users"; TODO create database table
+    $mysqli = require __DIR__ . "/database.php";
 
     // sanitize login
     $uname = mysqli -> real_escape_string($username);
     $pass = mysqli -> real_escape_string($password);
 
     // create sql select statement
-    $sql = sprintf('SELECT /*password*/ from /*login table*/ where email = "%s"',
+    $sql = sprintf('SELECT password_hash from users where email = "%s"',
       $uname);
 
     // query database
