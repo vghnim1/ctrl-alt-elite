@@ -8,4 +8,16 @@
         // TODO return session id
     }
 
+    // validate session
+    function validateSession(){
+        // TODO if no cookie, no session, return false 
+
+        // get session id from cookie
+        $sessionId = $_COOKIE['session_id'];
+
+        // TODO check if session id is valid
+    }
+
+
+    
 ?>
