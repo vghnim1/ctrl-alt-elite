@@ -7,7 +7,7 @@ require_once('rabbitMQLib.inc');
 function doLogin($username,$password)
 {
     // use to require database established
-    $mysqli = require __DIR__ . "/database.php";
+    $mysqli = require __DIR__ . "../sql/database.php";
 
     // sanitize login
     $uname = mysqli -> real_escape_string($username);
